@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Fit - Sua Melhor Versão Começa Aqui</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset e estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #f8f8f8;
+            background-color: #0a0a1a;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Cores */
+        :root {
+            --azul-principal: #0066ff;
+            --azul-escuro: #0044aa;
+            --preto: #0a0a1a;
+            --cinza-escuro: #1a1a2e;
+            --branco: #f8f8f8;
+        }
+        
+        /* Header e Navegação */
+        header {
+            background-color: var(--preto);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--branco);
+        }
+        
+        .logo span {
+            color: var(--azul-principal);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--branco);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--azul-principal);
+        }
+        
+        .btn-mobile {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--branco);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(10, 10, 26, 0.8), rgba(10, 10, 26, 0.8)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--azul-principal);
+            color: var(--branco);
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: background-color 0.3s, transform 0.3s;
+            margin: 10px;
+        }
+        
+        .btn:hover {
+            background-color: var(--azul-escuro);
+            transform: translateY(-3px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--azul-principal);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--azul-principal);
+        }
+        
+        /* Sobre */
+        .sobre {
+            padding: 100px 0;
+            background-color: var(--cinza-escuro);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--branco);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--azul-principal);
+        }
+        
+        .sobre-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .sobre-text {
+            flex: 1;
+        }
+        
+        .sobre-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--azul-principal);
+        }
+        
+        .sobre-text p {
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+        
+        .sobre-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .sobre-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Serviços */
+        .servicos {
+            padding: 100px 0;
+            background-color: var(--preto);
+        }
+        
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .servico-card {
+            background-color: var(--cinza-escuro);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .servico-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .servico-icon {
+            font-size: 3rem;
+            color: var(--azul-principal);
+            margin-bottom: 20px;
+        }
+        
+        .servico-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--branco);
+        }
+        
+        .servico-card p {
+            color: #ccc;
+        }
+        
+        /* Planos */
+        .planos {
+            padding: 100px 0;
+            background-color: var(--cinza-escuro);
+        }
+        
+        .planos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .plano-card {
+            background-color: var(--preto);
+            border-radius: 10px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .plano-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .plano-card.popular {
+            border: 2px solid var(--azul-principal);
+        }
+        
+        .plano-card.popular::before {
+            content: 'MAIS POPULAR';
+            position: absolute;
+            top: 15px;
+            right: -35px;
+            background-color: var(--azul-principal);
+            color: var(--branco);
+            padding: 5px 40px;
+            font-size: 12px;
+            font-weight: 700;
+            transform: rotate(45deg);
+        }
+        
+        .plano-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--branco);
+        }
+        
+        .preco {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--azul-principal);
+            margin-bottom: 20px;
+        }
+        
+        .preco span {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+        
+        .plano-beneficios {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .plano-beneficios li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+        }
+        
+        .plano-beneficios li i {
+            color: var(--azul-principal);
+            margin-right: 10px;
+        }
+        
+        /* Localização */
+        .localizacao {
+            padding: 100px 0;
+            background-color: var(--preto);
+        }
+        
+        .mapa {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .mapa iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Contato */
+        .contato {
+            padding: 100px 0;
+            background-color: var(--cinza-escuro);
+        }
+        
+        .contato-container {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .contato-info {
+            flex: 1;
+        }
+        
+        .contato-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--azul-principal);
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--azul-principal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .info-text {
+            color: #ccc;
+        }
+        
+        .contato-form {
+            flex: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--branco);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--branco);
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--preto);
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            margin-bottom: 30px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--azul-principal);
+        }
+        
+        .social-icons {
+            margin-bottom: 30px;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: var(--cinza-escuro);
+            border-radius: 50%;
+            margin: 0 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            font-size: 1.2rem;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--azul-principal);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            width: 100%;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .sobre-content {
+                flex-direction: column;
+            }
+            
+            .contato-container {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .btn-mobile {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--preto);
+                flex-direction: column;
+                padding: 20px 0;
+                text-align: center;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <h1>POWER <span>FIT</span></h1>
+            </div>
+            <nav>
+                <button class="btn-mobile">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#planos">Planos</a></li>
+                    <li><a href="#localizacao">Localização</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h2>Transforme seu corpo, transforme sua vida</h2>
+            <p>Na Power Fit, oferecemos a estrutura e o suporte necessários para você alcançar seus objetivos fitness e se tornar a sua melhor versão.</p>
+            <div class="hero-buttons">
+                <a href="#planos" class="btn">Comece Agora</a>
+                <a href="#sobre" class="btn btn-outline">Saiba Mais</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section class="sobre" id="sobre">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sobre Nós</h2>
+            </div>
+            <div class="sobre-content">
+                <div class="sobre-text">
+                    <h3>Power Fit - Mais que uma academia, uma comunidade</h3>
+                    <p>Fundada em 2010, a Power Fit nasceu com o propósito de transformar vidas através do fitness. Acreditamos que todos têm potencial para superar seus limites e alcançar objetivos que antes pareciam impossíveis.</p>
+                    <p>Nossa estrutura de 2000m² foi cuidadosamente planejada para oferecer o que há de melhor em equipamentos e conforto para nossos alunos. Contamos com áreas específicas para musculação, cardio, cross training, aulas coletivas e avaliação física.</p>
+                    <p>Nossa equipe é formada por profissionais altamente qualificados e comprometidos com seu resultado. Na Power Fit, você não é apenas mais um, você é parte da nossa família.</p>
+                    <a href="#contato" class="btn">Venha nos Conhecer</a>
+                </div>
+                <div class="sobre-img">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Academia Power Fit">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section class="servicos" id="servicos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Serviços</h2>
+            </div>
+            <div class="servicos-grid">
+                <div class="servico-card">
+                    <div class="servico-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Musculação</h3>
+                    <p>Área completa com equipamentos de última geração para todos os grupos musculares.</p>
+                </div>
+                <div class="servico-card">
+                    <div class="servico-icon">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <h3>Aeróbicos</h3>
+                    <p>Esteiras, bikes, elípticos e escadas para seu treino cardio.</p>
+                </div>
+                <div class="servico-card">
+                    <div class="servico-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Aulas Coletivas</h3>
+                    <p>Zumba, spinning, pilates, funcional e muitas outras modalidades.</p>
+                </div>
+                <div class="servico-card">
+                    <div class="servico-icon">
+                        <i class="fas fa-weight"></i>
+                    </div>
+                    <h3>Cross Training</h3>
+                    <p>Área especializada com equipamentos para treinamento funcional de alta intensidade.</p>
+                </div>
+                <div class="servico-card">
+                    <div class="servico-icon">
+                        <i class="fas fa-swimmer"></i>
+                    </div>
+                    <h3>Aquático</h3>
+                    <p>Hidroginástica e natação para todas as idades com professores especializados.</p>
+                </div>
+                <div class="servico-card">
+                    <div class="servico-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>Avaliação Física</h3>
+                    <p>Acompanhamento completo com avaliações periódicas e planejamento personalizado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planos -->
+    <section class="planos" id="planos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Planos</h2>
+            </div>
+            <div class="planos-grid">
+                <div class="plano-card">
+                    <h3>Basic</h3>
+                    <div class="preco">R$ 79<span>/mês</span></div>
+                    <ul class="plano-beneficios">
+                        <li><i class="fas fa-check"></i> Acesso à musculação</li>
+                        <li><i class="fas fa-check"></i> Área de cardio</li>
+                        <li><i class="fas fa-times"></i> Aulas coletivas</li>
+                        <li><i class="fas fa-times"></i> Área de cross training</li>
+                        <li><i class="fas fa-times"></i> Avaliação física</li>
+                    </ul>
+                    <a href="#contato" class="btn btn-outline">Assinar Agora</a>
+                </div>
+                <div class="plano-card popular">
+                    <h3>Premium</h3>
+                    <div class="preco">R$ 119<span>/mês</span></div>
+                    <ul class="plano-beneficios">
+                        <li><i class="fas fa-check"></i> Acesso à musculação</li>
+                        <li><i class="fas fa-check"></i> Área de cardio</li>
+                        <li><i class="fas fa-check"></i> Todas as aulas coletivas</li>
+                        <li><i class="fas fa-check"></i> Área de cross training</li>
+                        <li><i class="fas fa-check"></i> Avaliação física mensal</li>
+                    </ul>
+                    <a href="#contato" class="btn">Assinar Agora</a>
+                </div>
+                <div class="plano-card">
+                    <h3>Black</h3>
+                    <div class="preco">R$ 149<span>/mês</span></div>
+                    <ul class="plano-beneficios">
+                        <li><i class="fas fa-check"></i> Acesso ilimitado a todas as áreas</li>
+                        <li><i class="fas fa-check"></i> Aulas coletivas ilimitadas</li>
+                        <li><i class="fas fa-check"></i> Leve um amigo aos finais de semana</li>
+                        <li><i class="fas fa-check"></i> Avaliação física semanal</li>
+                        <li><i class="fas fa-check"></i> Personal trainer 1x por semana</li>
+                    </ul>
+                    <a href="#contato" class="btn btn-outline">Assinar Agora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Localização -->
+    <section class="localizacao" id="localizacao">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossa Localização</h2>
+            </div>
+            <div class="mapa">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d467692.3952662773!2d-46.924788325!3d-23.681434499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce4481839b175d%3A0x9c5e4552f6b2c77!2sAcademia!5e0!3m2!1spt-BR!2sbr!4v1684968943173!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section class="contato" id="contato">
+        <div class="container">
+            <div class="section-title">
+                <h2>Entre em Contato</h2>
+            </div>
+            <div class="contato-container">
+                <div class="contato-info">
+                    <h3>Fale Conosco</h3>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-text">
+                            <p>Av. Paulista, 1000, São Paulo - SP</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="info-text">
+                            <p>(11) 9999-9999</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-text">
+                            <p>contato@powerfit.com.br</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="info-text">
+                            <p>Segunda a Sexta: 5h às 23h<br>Sábado: 7h às 20h<br>Domingo: 9h às 16h</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contato-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" id="nome" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" placeholder="Seu e-mail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" id="telefone" placeholder="Seu telefone">
+                        </div>
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem</label>
+                            <textarea id="mensagem" placeholder="Sua mensagem" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <h1>POWER <span>FIT</span></h1>
+            </div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#servicos">Serviços</a>
+                <a href="#planos">Planos</a>
+                <a href="#localizacao">Localização</a>
+                <a href="#contato">Contato</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Power Fit Academia. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Mobile
+        const btnMobile = document.querySelector('.btn-mobile');
+        const navMenu = document.querySelector('nav ul');
+        
+        btnMobile.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Fechar menu ao clicar em um link
+        const navLinks = document.querySelectorAll('nav ul li a');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+        
+        // Smooth scroll para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
